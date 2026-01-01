@@ -36,7 +36,7 @@ Function move_snake
     Calculate the new position of the head
     Add the new head to the beginning of the snake
 
-    If the head is on the food
+    if the head is on the food
         Increment the score
         Generate new food
     Otherwise
