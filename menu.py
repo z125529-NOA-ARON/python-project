@@ -1,6 +1,6 @@
 import pygame
 import os
-from user_manager import UserManager
+from user_manager import UserManager, EmptyFieldError, InvalidCredentialsError, FileAccessError
 from score_manager import ScoreManager
 from snake_game import SnakeGame
 from snake_game import screen_height, screen_width
@@ -135,10 +135,17 @@ def menu():
                 username = username_box.text
                 password = password_box.text
 
-                if username and password:
+                # Tentative d'authentification avec gestion des exceptions ajoutées
+                try:
                     if user_manager.authenticate(username, password):
                         score_manager = ScoreManager(user_manager)
                         SnakeGame(username, score_manager).start()
+                except EmptyFieldError:
+                    print("Remplissez tous les champs (username et password)")  # message simple pour debug
+                except InvalidCredentialsError:
+                    print("Mot de passe incorrect")  # message simple pour debug
+                except FileAccessError as e:
+                    print(f"Erreur fichier utilisateurs: {e}")  # log de l'erreur
             
             if custom_button.clicked(event):
                 customisation_menu()
