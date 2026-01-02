@@ -2,6 +2,7 @@ import pygame
 from user_manager import UserManager
 from score_manager import ScoreManager
 from snake_game import SnakeGame
+from snake_game import screen_height, screen_width
 
 pygame.init()
 
@@ -12,7 +13,7 @@ class InputBox:
         self.text = ""
         self.placeholder = placeholder
         self.active = False
-        self.font = pygame.font.SysFont("ADLaM Display", 26)
+        self.font = pygame.font.SysFont("ADLaM Display", 25)
         self.cursor_visible = True
         self.cursor_timer = 0
 
@@ -36,8 +37,13 @@ class InputBox:
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect, 2)
 
-        txt = self.text if self.text else self.placeholder
-        txt_surface = self.font.render(txt, True, (255, 255, 255))
+        if self.text != "":
+            txt_surface = self.font.render(self.text, True, (255, 255, 255))
+        elif not self.active:
+            txt_surface = self.font.render(self.placeholder, True, (150, 150, 150))
+        else:
+            txt_surface = self.font.render("", True, (255, 255, 255))
+
         screen.blit(txt_surface, (self.rect.x + 10, self.rect.y + 10))
 
         # Curseur clignotant
@@ -63,20 +69,40 @@ class Button:
 
 
 def menu():
-    screen = pygame.display.set_mode((600, 400))
+    width = screen_width
+    height = screen_height
+    button_width = 140
+    button_height = 50
+    box_width = 200
+    box_height = 50
+
+
+    screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Snake Menu")
 
-    username_box = InputBox(200, 120, 200, 40, "Utilisateur")
-    password_box = InputBox(200, 180, 200, 40, "Mot de passe")
-    play_button   = Button(230, 250, 140, 50, "JOUER")
-    quit_button   = Button(230, 310, 140, 50, "QUITTER")
+    background = pygame.image.load("C:/Users/eunic/OneDrive - IPSA/aero4/Japon/courses/applied_computer_prog/projet/tests/snake_menu.png").convert()
+    background = pygame.transform.scale(background, (width, height))
+
+    dark_overlay = pygame.Surface((width, height))
+    dark_overlay.set_alpha(120)  # 0 = transparent, 255 = noir total
+    dark_overlay.fill((0, 0, 0))
+    
+
+    username_box = InputBox((width // 2) - (box_width // 2) , (height // 2 ) - 10 - box_height , box_width, box_height, "User")
+    password_box = InputBox((width // 2) - (box_width // 2) , (height // 2 ) + 10 , box_width, box_height, "Password")
+    
+    play_button = Button(width // 5                 , height - 100, button_width, button_height, "Play")
+    quit_button = Button(width - (width // 5) - 140 , height - 100, button_width, button_height, "Quit")
 
     user_manager = UserManager()
 
     clock = pygame.time.Clock()
 
     while True:
-        screen.fill((30, 30, 30))
+        
+        screen.blit(background, (0, 0))
+        screen.blit(dark_overlay, (0, 0))
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -104,13 +130,13 @@ def menu():
         password_box.update()
 
         # Affichage
-        title = pygame.font.SysFont("Arial", 40).render("Connexion Snake", True, (255, 255, 0))
-        screen.blit(title, (180, 40))
+        title = pygame.font.SysFont("Comic Sans MS", 50).render("Log in", True, (255, 255, 255))
+        screen.blit(title, (screen_width // 2 - 70, 30))
 
         username_box.draw(screen)
         password_box.draw(screen)
-        play_button.draw(screen)
-        quit_button.draw(screen, (200, 0, 0))
+        play_button.draw(screen, (46,139,87))
+        quit_button.draw(screen, (170, 0, 0))
 
         pygame.display.flip()
         clock.tick(30)
