@@ -114,7 +114,7 @@ class SnakeGame:
 
             # diplay the snake segments
             for block in self.snake:
-                pygame.draw.rect(screen, (0, 180, 0), (*block, self.block, self.block))
+                pygame.draw.rect(screen, (0, 128, 0), (*block, self.block, self.block))
 
             # diplay the apple
             screen.blit(self.apple_img, self.food)
