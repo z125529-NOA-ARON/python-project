@@ -71,7 +71,7 @@ class SnakeGame:
         from game_over import game_over_screen                         # import game over screen fonction
         from menu import menu                                          # import menu fonction
 
-        font = pygame.font.SysFont("Arial", 24)                        # creation of the font for the score display
+        font = pygame.font.SysFont("Comic Sans MS", 20)                        # creation of the font for the score display
 
         while True:
             for event in pygame.event.get():
