@@ -1,4 +1,5 @@
 import pygame
+import os
 from user_manager import UserManager
 from score_manager import ScoreManager
 from snake_game import SnakeGame
@@ -95,7 +96,8 @@ def menu():
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Snake Menu")
 
-    background = pygame.image.load("C:/Users/eunic/OneDrive - IPSA/aero4/Japon/courses/applied_computer_prog/projet/tests/snake_menu.png").convert()
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    background = pygame.image.load(os.path.join(base_dir, "snake_menu.png")).convert()
     background = pygame.transform.scale(background, (width, height))
 
     dark_overlay = pygame.Surface((width, height))

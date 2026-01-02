@@ -1,6 +1,7 @@
 import pygame
 import random
 import personalisation
+import os
 
 screen_width = 800
 screen_height = 400
@@ -18,11 +19,12 @@ class SnakeGame:
         self.height = screen_height
         self.block = 20
 
-        # download images --> change the path
-        self.grass = pygame.image.load("C:/Users/eunic/OneDrive - IPSA/aero4/Japon/courses/applied_computer_prog/projet/tests/grass.png")
+        # download images --> use images from same folder as this file
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.grass = pygame.image.load(os.path.join(base_dir, "grass.png"))
         self.grass = pygame.transform.scale(self.grass, (self.width, self.height))
 
-        self.apple_img = pygame.image.load("C:/Users/eunic/OneDrive - IPSA/aero4/Japon/courses/applied_computer_prog/projet/tests/appel.png")
+        self.apple_img = pygame.image.load(os.path.join(base_dir, "appel.png"))
         self.apple_img = pygame.transform.scale(self.apple_img, (20, 20))
 
         # Reset

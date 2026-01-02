@@ -1,4 +1,5 @@
 import pygame
+import os
 from snake_game import screen_height, screen_width
 
 podium_positions = {
@@ -39,7 +40,8 @@ def game_over_screen(screen, score, top4):
 
         # -------- PHASE 1 : YOU LOSE (10 secondes) --------
         if elapsed < 2000:
-            background = pygame.image.load("C:/Users/eunic/OneDrive - IPSA/aero4/Japon/courses/applied_computer_prog/projet/tests/snake_game_over.png").convert()
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            background = pygame.image.load(os.path.join(base_dir, "snake_game_over.png")).convert()
             background = pygame.transform.scale(background, (screen_width, screen_height))
             screen.blit(background, (0, 0))
 
@@ -51,7 +53,7 @@ def game_over_screen(screen, score, top4):
         else:
             show_score = True
             # screen.fill((0, 0, 0))
-            background = pygame.image.load("C:/Users/eunic/OneDrive - IPSA/aero4/Japon/courses/applied_computer_prog/projet/tests/podium.png").convert()
+            background = pygame.image.load(os.path.join(base_dir, "podium.png")).convert()
             background = pygame.transform.scale(background, (screen_width, screen_height))
             screen.blit(background, (0, 0))
 

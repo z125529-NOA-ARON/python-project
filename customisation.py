@@ -1,4 +1,5 @@
 import pygame
+import os
 from personalisation import snake_color
 import personalisation
 from snake_game import screen_width, screen_height
@@ -40,7 +41,8 @@ def customisation_menu():
 
     back_button = Button(screen_width // 2 - 150 // 2, screen_height - 60, 150, 50, "Retour", (191, 191, 191))
 
-    background = pygame.image.load("C:/Users/eunic/OneDrive - IPSA/aero4/Japon/courses/applied_computer_prog/projet/tests/customise_background.png").convert()
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    background = pygame.image.load(os.path.join(base_dir, "customise_background.png")).convert()
     background = pygame.transform.scale(background, (screen_width, screen_height))
 
     while True:
