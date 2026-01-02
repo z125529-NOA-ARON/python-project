@@ -141,11 +141,11 @@ def menu():
                         score_manager = ScoreManager(user_manager)
                         SnakeGame(username, score_manager).start()
                 except EmptyFieldError:
-                    print("Remplissez tous les champs (username et password)")  # message simple pour debug
+                    print("\033[31mRemplissez tous les champs (username et password)\033[0m")  # message simple pour debug
                 except InvalidCredentialsError:
-                    print("Mot de passe incorrect")  # message simple pour debug
+                    print("\033[31mMot de passe incorrect\033[0m")  # message simple pour debug
                 except FileAccessError as e:
-                    print(f"Erreur fichier utilisateurs: {e}")  # log de l'erreur
+                    print(f"\033[31mErreur fichier utilisateurs:\033[0m {e}")  # log de l'erreur
             
             if custom_button.clicked(event):
                 customisation_menu()
@@ -171,3 +171,4 @@ def menu():
 
         pygame.display.flip()
         clock.tick(30)
+
