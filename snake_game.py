@@ -23,7 +23,7 @@ class SnakeGame:
 
     # fonction of the reset
     def reset_game(self):
-        self.snake = [(self.width/2, self.height/2)]          # initialise the snaze at the position (100,100); the size is 1 segment 
+        self.snake = [(self.width/2, self.height/2)]          # initialise the snake at the position (100,100); the size is 1 segment 
         self.direction = (self.block, 0)                      # initialise the direction of the snake to the right
         self.score = 0                                        # reset the score to 0
         self.food = self.spawn_food()                         # generate the first food position
