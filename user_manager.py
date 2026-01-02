@@ -69,7 +69,7 @@ class UserManager:
             wb = openpyxl.load_workbook(self.filename)
         except Exception as e:
             # Propagation via exception spécifique pour faciliter les tests 
-            raise FileAccessError(f"Impossible de lire le fichier users: {e}")
+            raise FileAccessError(f"\033[31mImpossible de lire le fichier users\033[0m: {e}")
 
         sheet = wb.active
 
@@ -91,12 +91,12 @@ class UserManager:
         try:
             wb.save(self.filename)
         except Exception as e:
-            raise FileAccessError(f"Impossible d'écrire le fichier users: {e}")
+            raise FileAccessError(f"\033[31mImpossible d'écrire le fichier users\033[0m: {e}")
 
     def authenticate(self, username, password):
         # Validation minimale des champs
         if not username or not password:
-            raise EmptyFieldError("Le nom d'utilisateur et le mot de passe ne peuvent pas être vides")
+            raise EmptyFieldError("\033[31mLe nom d'utilisateur et le mot de passe ne peuvent pas être vides\033[0m")
 
         if username not in self.users:
             # créer un nouvel utilisateur si inexistant
@@ -109,11 +109,11 @@ class UserManager:
         if user.password == password:
             return True
         # Pour l'évaluation : lever une exception quand le mot de passe est incorrect
-        raise InvalidCredentialsError("Mot de passe incorrect")
+        raise InvalidCredentialsError("\033[31mPassword incorrect\033[0m")
 
     def update_best_score(self, username, score):
         if username not in self.users:
-            raise InvalidCredentialsError("Utilisateur introuvable")
+            raise InvalidCredentialsError("\033[31mUser unknown\033[0m")
 
         user = self.users[username]
         if score > user.best_score:
@@ -133,3 +133,4 @@ class UserManager:
         for username, user in sorted_users[:4]:
             result.append((username, {"best_score": user.best_score}))
         return result
+
