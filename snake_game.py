@@ -121,7 +121,7 @@ class SnakeGame:
 
             # Diplay the score
             score_text = font.render(f"Score : {self.score}", True, (255, 255, 255))
-            screen.blit(score_text, (self.width - 100, 10))
+            screen.blit(score_text, (self.width - 105, 5))
 
             pygame.display.flip()                                           #update the display
             clock.tick(10)                                                  # 10 FPS 
