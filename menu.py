@@ -6,6 +6,13 @@ from snake_game import screen_height, screen_width
 
 pygame.init()
 
+
+button_width = 140
+button_height = 50
+box_width = 200
+box_height = 50
+
+
 class InputBox:
     def __init__(self, x, y, w, h, placeholder=""):
         self.rect = pygame.Rect(x, y, w, h)
@@ -13,7 +20,7 @@ class InputBox:
         self.text = ""
         self.placeholder = placeholder
         self.active = False
-        self.font = pygame.font.SysFont("ADLaM Display", 25)
+        self.font = pygame.font.SysFont("Comic Sans MS", 20)
         self.cursor_visible = True
         self.cursor_timer = 0
 
@@ -35,7 +42,7 @@ class InputBox:
             self.cursor_visible = not self.cursor_visible
 
     def draw(self, screen):
-        pygame.draw.rect(screen, self.color, self.rect, 2)
+        pygame.draw.rect(screen, self.color, self.rect, 2, border_radius = 30)
 
         if self.text != "":
             txt_surface = self.font.render(self.text, True, (255, 255, 255))
@@ -57,24 +64,25 @@ class Button:
     def __init__(self, x, y, w, h, text):
         self.rect = pygame.Rect(x, y, w, h)
         self.text = text
-        self.font = pygame.font.SysFont("Arial", 32)
+        self.font = pygame.font.SysFont("Comic Sans MS", 32)
 
     def draw(self, screen, color=(0, 150, 0)):
-        pygame.draw.rect(screen, color, self.rect)
+        pygame.draw.rect(screen, color, self.rect, border_radius =  30)
         label = self.font.render(self.text, True, (255, 255, 255))
-        screen.blit(label, (self.rect.x + 20, self.rect.y + 10))
+        screen.blit(label, (self.rect.x + 35, self.rect.y))
 
     def clicked(self, event):
         return event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos)
 
 
+
 def menu():
     width = screen_width
     height = screen_height
-    button_width = 140
-    button_height = 50
-    box_width = 200
-    box_height = 50
+    # button_width = 140
+    # button_height = 50
+    # box_width = 200
+    # box_height = 50
 
 
     screen = pygame.display.set_mode((width, height))
@@ -91,7 +99,7 @@ def menu():
     username_box = InputBox((width // 2) - (box_width // 2) , (height // 2 ) - 10 - box_height , box_width, box_height, "User")
     password_box = InputBox((width // 2) - (box_width // 2) , (height // 2 ) + 10 , box_width, box_height, "Password")
     
-    play_button = Button(width // 5                 , height - 100, button_width, button_height, "Play")
+    play_button = Button(width // 5                 , height - 100, button_width, button_height, " Play")
     quit_button = Button(width - (width // 5) - 140 , height - 100, button_width, button_height, "Quit")
 
     user_manager = UserManager()
