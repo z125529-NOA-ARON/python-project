@@ -1,10 +1,11 @@
 import pygame
-import os
-from user_manager import UserManager, EmptyFieldError, InvalidCredentialsError, FileAccessError
+from user_manager import UserManager
 from score_manager import ScoreManager
 from snake_game import SnakeGame
 from snake_game import screen_height, screen_width
 from customisation import customisation_menu
+from button import Button
+
 
 pygame.init()
 
@@ -62,25 +63,25 @@ class InputBox:
             pygame.draw.rect(screen, (255, 255, 255), (cursor_x, cursor_y, 2, 25))
 
 
-class Button:
-    def __init__(self, x, y, w, h, text):
-        self.rect = pygame.Rect(x, y, w, h)
-        self.text = text
-        self.font = pygame.font.SysFont("Comic Sans MS", 32)
+# class Button:
+#     def __init__(self, x, y, w, h, text):
+#         self.rect = pygame.Rect(x, y, w, h)
+#         self.text = text
+#         self.font = pygame.font.SysFont("Comic Sans MS", 32)
 
-    # def draw(self, screen, color=(0, 150, 0)):
-    #     pygame.draw.rect(screen, color, self.rect, border_radius =  30)
-    #     label = self.font.render(self.text, True, (255, 255, 255))
-    #     screen.blit(label, (self.rect.x , self.rect.y))
+#     # def draw(self, screen, color=(0, 150, 0)):
+#     #     pygame.draw.rect(screen, color, self.rect, border_radius =  30)
+#     #     label = self.font.render(self.text, True, (255, 255, 255))
+#     #     screen.blit(label, (self.rect.x , self.rect.y))
 
-    def draw(self, screen, color = (0,150,0)):
-        pygame.draw.rect(screen, color, self.rect, border_radius =  30)
-        label = self.font.render(self.text, True, (255, 255, 255))
-        label_rect = label.get_rect(center=self.rect.center)
-        screen.blit(label, label_rect)
+#     def draw(self, screen, color = (0,150,0)):
+#         pygame.draw.rect(screen, color, self.rect, border_radius =  30)
+#         label = self.font.render(self.text, True, (255, 255, 255))
+#         label_rect = label.get_rect(center=self.rect.center)
+#         screen.blit(label, label_rect)
 
-    def clicked(self, event):
-        return event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos)
+#     def clicked(self, event):
+#         return event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos)
 
 
 
@@ -96,8 +97,7 @@ def menu():
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Snake Menu")
 
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    background = pygame.image.load(os.path.join(base_dir, "snake_menu.png")).convert()
+    background = pygame.image.load("C:/Users/eunic/OneDrive - IPSA/aero4/Japon/courses/applied_computer_prog/projet/tests/snake_menu.png").convert()
     background = pygame.transform.scale(background, (width, height))
 
     dark_overlay = pygame.Surface((width, height))
@@ -108,10 +108,10 @@ def menu():
     username_box = InputBox((width // 2) - (box_width // 2) , (height // 2 ) - 10 - box_height , box_width, box_height, "User")
     password_box = InputBox((width // 2) - (box_width // 2) , (height // 2 ) + 10 , box_width, box_height, "Password")
     
-    play_button = Button(width // 5                 , height - 100, button_width, button_height, "Play")
-    quit_button = Button(width - (width // 5) - 140 , height - 100, button_width, button_height, "Quit")
+    play_button = Button(width // 5                 , height - 100, button_width, button_height, "Play", (46,139,87))
+    quit_button = Button(width - (width // 5) - 140 , height - 100, button_width, button_height, "Quit",(170,0,0))
 
-    custom_button = Button(width // 2 - (button_height + 30), height - 100, button_width + 20, button_height, "Custom")
+    custom_button = Button(width // 2 - (button_height + 30), height - 100, button_width + 20, button_height, "Custom",(70,130,180))
 
     user_manager = UserManager()
 
@@ -135,17 +135,10 @@ def menu():
                 username = username_box.text
                 password = password_box.text
 
-                # Tentative d'authentification avec gestion des exceptions ajoutées
-                try:
+                if username and password:
                     if user_manager.authenticate(username, password):
                         score_manager = ScoreManager(user_manager)
                         SnakeGame(username, score_manager).start()
-                except EmptyFieldError:
-                    print("\033[31mRemplissez tous les champs (username et password)\033[0m")  # message simple pour debug
-                except InvalidCredentialsError:
-                    print("\033[31mMot de passe incorrect\033[0m")  # message simple pour debug
-                except FileAccessError as e:
-                    print(f"\033[31mErreur fichier utilisateurs:\033[0m {e}")  # log de l'erreur
             
             if custom_button.clicked(event):
                 customisation_menu()
@@ -164,11 +157,10 @@ def menu():
 
         username_box.draw(screen)
         password_box.draw(screen)
-        play_button.draw(screen, (46,139,87))
-        quit_button.draw(screen, (170, 0, 0))
-        custom_button.draw(screen, (70, 130, 180))
+        play_button.draw(screen)
+        quit_button.draw(screen)
+        custom_button.draw(screen)
 
 
         pygame.display.flip()
         clock.tick(30)
-
