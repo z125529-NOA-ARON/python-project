@@ -17,6 +17,9 @@ box_height = 50
 
 
 class InputBox:
+    """
+    Class that creates the User input box on the Menu
+    """
     def __init__(self, x, y, w, h, placeholder=""):
         self.rect = pygame.Rect(x, y, w, h)
         self.color = (200, 200, 200)
@@ -164,3 +167,4 @@ def menu():
 
         pygame.display.flip()
         clock.tick(30)
+
