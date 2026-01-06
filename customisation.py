@@ -52,7 +52,7 @@ def customisation_menu():
             #update the snake color based on the selected button
             for b in buttons:
                 if b.clicked(event):
-                    personalisation.snake_color = b.color   
+                    personalisation.snake_color = b.bg_color 
                     return
 
             if back_button.clicked(event): #return to previous menu if back button was clicked
@@ -67,5 +67,6 @@ def customisation_menu():
 
         pygame.display.flip() #update the display
         clock.tick(30) #limit the frame rate to 30 FPS
+
 
 
