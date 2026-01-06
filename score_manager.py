@@ -1,8 +1,6 @@
 """
-score_manager.py
 Adapter around `UserManager` to expose score-related operations
 to the rest of the application.
-Noa - Z125529
 """
 
 
@@ -13,6 +11,8 @@ class ScoreManager:
     - user_manager: an instance providing `update_best_score(username, score)`
       and `get_top_4()` methods (the project's `UserManager` fits this
       contract).
+
+    Noa - Z125529
     """
 
     def __init__(self, user_manager):
@@ -25,3 +25,4 @@ class ScoreManager:
     def get_top_4(self):
         """Return the top 4 users as provided by `UserManager.get_top_4()`."""
         return self.user_manager.get_top_4()
+
