@@ -153,8 +153,8 @@ def menu():
 
             # ----- Play Button -----
             if play_button.clicked(event):
-                username = username_box.text.strip()
-                password = password_box.text.strip()
+                username = username_box.text
+                password = password_box.text
 
                 if username and password:
                     try:
