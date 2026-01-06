@@ -3,17 +3,13 @@ import os
 
 
 """
-user_manager.py
-Provides a small user management system backed by an Excel file.
+Small user management system backed by an Excel file.
 
-Responsibilities:
-- define custom exceptions for caller-friendly error handling
-- represent users with the `User` dataclass-like object
-- load/save users from/to an Excel workbook using openpyxl
-- authenticate users and update high scores
+- Define custom exceptions for caller-friendly error handling
+- Load/save users from/to an Excel workbook using openpyxl
+- Authenticate users and update high scores
 
-Errors are exposed via
-specific exceptions and data is kept in-memory until saved.
+Errors are exposed via specific exceptions and data is kept in-memory until saved.
 
 Noa - Z125529
 """
@@ -21,6 +17,7 @@ Noa - Z125529
 
 class UserManagerError(Exception):
     """Base exception for all UserManager-related errors."""
+    """Exceptions : Noa - Z125529"""
 
 
 class EmptyFieldError(UserManagerError):
@@ -40,6 +37,8 @@ class User:
 
     The class implements a few operator overloads to make it convenient
     to compare, display and increment scores.
+
+    Noa - Z125529
     """
 
     def __init__(self, username, password, best_score=0):
@@ -81,6 +80,8 @@ class UserManager:
         manager = UserManager('info_snake.xlsx')
         manager.authenticate('alice', 'password')
         manager.update_best_score('alice', 42)
+
+    Noa - Z125529
     """
 
     def __init__(self, filename="info_snake.xlsx"):
@@ -188,4 +189,5 @@ class UserManager:
         for username, user in sorted_users[:4]:
             result.append((username, {"best_score": user.best_score}))
         return result
+
 
