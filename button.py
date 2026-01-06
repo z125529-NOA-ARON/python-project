@@ -18,11 +18,8 @@ class Button:
     def clicked(self, event):
         return event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos)
     
-
-
-
-class BoutonCouleur(Button):
-    def __init__(self, x, y, w, h, text, color):
-        super().__init__(x, y, w, h, text, color)
-        self.color = color
+# class BoutonCouleur(Button):
+#     def __init__(self, x, y, w, h, text, color):
+#         super().__init__(x, y, w, h, text, color)
+#         self.color = color
 
