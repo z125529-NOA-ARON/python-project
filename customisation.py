@@ -10,6 +10,8 @@ from button import Button
 Marie Zhu z525082
 """
 
+#This function displays a customisation menu for changing the snake color.
+#It handles the user input, updates the selected color and allows the player to go back to the main menu.
 
 def customisation_menu():
     pygame.init()
@@ -67,6 +69,7 @@ def customisation_menu():
 
         pygame.display.flip() #update the display
         clock.tick(30) #limit the frame rate to 30 FPS
+
 
 
 
