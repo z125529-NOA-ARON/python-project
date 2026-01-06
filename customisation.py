@@ -39,7 +39,7 @@ def customisation_menu():
         Button(330+80, 150, 150, 50, "Pink",   (255, 171, 187)),
     ]
 
-    back_button = Button(screen_width // 2 - 150 // 2, screen_height - 60, 150, 50, "Retour", (191, 191, 191))
+    back_button = Button(screen_width // 2 - 150 // 2, screen_height - 60, 150, 50, "Back", (191, 191, 191))
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
     background = pygame.image.load(os.path.join(base_dir, "customise_background.png")).convert()
@@ -71,3 +71,4 @@ def customisation_menu():
 
         pygame.display.flip()
         clock.tick(30)
+
