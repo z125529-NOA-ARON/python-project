@@ -55,7 +55,7 @@ def game_over_screen(screen, score, top4):
         if elapsed < 2000:
             #load and display background image
             base_dir = os.path.dirname(os.path.abspath(__file__))
-            background = pygame.image.load(os.path.join(base_dir, "snake_game_over.png")).convert()
+            background = pygame.image.load(os.path.join(base_dir, "images", "snake_game_over.png")).convert()
             background = pygame.transform.scale(background, (screen_width, screen_height))
             screen.blit(background, (0, 0))
             
@@ -70,7 +70,7 @@ def game_over_screen(screen, score, top4):
             show_score = True
             
             #load and display the podium image
-            background = pygame.image.load(os.path.join(base_dir, "podium.png")).convert()
+            background = pygame.image.load(os.path.join(base_dir, "images", "podium.png")).convert()
             background = pygame.transform.scale(background, (screen_width, screen_height))
             screen.blit(background, (0, 0))
 
