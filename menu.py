@@ -112,7 +112,7 @@ def menu():
 
     # Load background image using relative path
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    background_path = os.path.join(base_dir, "snake_menu.png")
+    background_path = os.path.join(base_dir, "images", "snake_menu.png")
     background = pygame.image.load(background_path).convert()
     background = pygame.transform.scale(background, (width, height))
 
