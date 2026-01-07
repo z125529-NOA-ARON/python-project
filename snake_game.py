@@ -26,10 +26,10 @@ class SnakeGame:
 
          # download images --> use images from same folder as this file
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        self.grass = pygame.image.load(os.path.join(base_dir, "grass.png"))
+        self.grass = pygame.image.load(os.path.join(base_dir, "images", "grass.png"))
         self.grass = pygame.transform.scale(self.grass, (self.width, self.height))
 
-        self.apple_img = pygame.image.load(os.path.join(base_dir, "appel.png"))
+        self.apple_img = pygame.image.load(os.path.join(base_dir, "images", "appel.png"))
         self.apple_img = pygame.transform.scale(self.apple_img, (20, 20))
 
         # Reset
