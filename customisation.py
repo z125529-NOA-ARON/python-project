@@ -33,7 +33,7 @@ def customisation_menu():
 
     #load and scale the background image
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    background = pygame.image.load(os.path.join(base_dir, "customise_background.png")).convert()
+    background = pygame.image.load(os.path.join(base_dir, "images", "customise_background.png")).convert()
     background = pygame.transform.scale(background, (screen_width, screen_height))
 
     #loop of the customisation menu
