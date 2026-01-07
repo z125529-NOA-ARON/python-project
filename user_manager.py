@@ -105,7 +105,7 @@ class UserManager:
 
         If the file does not exist, create it with a header row.
         Any file access error is re-raised as FileAccessError to make
-        error handling predictable for callers and tests.
+        error handling predictable.
         """
         if not os.path.exists(self.filename):
             wb = openpyxl.Workbook()
@@ -130,9 +130,6 @@ class UserManager:
     def save_users(self):
         """
         Persist the current `self.users` mapping into the Excel file.
-
-        The file is rewritten entirely from the in-memory data to keep
-        the implementation simple and deterministic.
         """
         wb = openpyxl.Workbook()
         sheet = wb.active
@@ -193,9 +190,6 @@ class UserManager:
     def get_top_4(self):
         """
         Return the top 4 users as a list of (username, {"best_score": ...}).
-
-        The result matches the existing code's expected shape so callers
-        can remain unchanged while benefiting from clearer implementation.
         """
         # Sort users by best_score descending
         sorted_users = sorted(
@@ -208,5 +202,6 @@ class UserManager:
         for username, user in sorted_users[:4]:
             result.append((username, {"best_score": user.best_score}))
         return result
+
 
 
